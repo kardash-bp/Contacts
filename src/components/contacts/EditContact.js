@@ -87,6 +87,14 @@ class EditContact extends Component {
               value='Update Contact'
             />
           </form>
+          <button
+            type='button'
+            class='btn btn-info'
+            onClick={() => this.props.history.push('/')}
+          >
+            {' '}
+            Back to Home
+          </button>
         </div>
       </div>
     )
