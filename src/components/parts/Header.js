@@ -1,5 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faHome,
+  faPlus,
+  faQuestion,
+  faSearch
+} from '@fortawesome/free-solid-svg-icons'
 import './header.css'
 export const Header = () => {
   return (
@@ -19,28 +26,25 @@ export const Header = () => {
 
       <div className='collapse navbar-collapse' id='navbarSupportedContent'>
         <ul className='navbar-nav mr-auto'>
-          <li className='nav-item active'>
-            <a className='nav-link' href='#'>
-              Home <span className='sr-only'>(current)</span>
-            </a>
-          </li>
-          {/* <li className='nav-item'>
-            <Link className='nav-link' to='/add'>
-              Add Contact
+          <li className='nav-item'>
+            <Link className='nav-link' to='/'>
+              <FontAwesomeIcon icon={faHome} />
+              &nbsp; Home
             </Link>
-          </li> */}
+          </li>
+          <li className='nav-item'>
+            <Link className='nav-link' to='/add'>
+              <FontAwesomeIcon icon={faPlus} />
+              &nbsp; Add Contact
+            </Link>
+          </li>
+          <li className='nav-item'>
+            <Link className='nav-link' to='/about'>
+              <FontAwesomeIcon icon={faQuestion} />
+              &nbsp; About
+            </Link>
+          </li>
         </ul>
-        <form className='form-inline my-2 my-lg-0'>
-          <input
-            className='form-control mr-sm-2'
-            type='search'
-            placeholder='Search'
-            aria-label='Search'
-          />
-          <button className='btn btn-outline-success my-2 my-sm-0' type='submit'>
-            Search
-          </button>
-        </form>
       </div>
     </nav>
   )

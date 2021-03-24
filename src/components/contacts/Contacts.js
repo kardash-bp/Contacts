@@ -1,32 +1,54 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
-import { Consumer } from '../../Context'
+import { allContacts, deleteContacts } from '../../redux/actions'
 import Contact from './Contact'
+
 import './contact.css'
+import Sidebar from '../parts/Sidebar'
 class Contacts extends Component {
+  state = {
+    term: ''
+  }
+  componentDidMount() {
+    this.props.allContacts()
+  }
+  handleSearch = (term) => {
+    this.setState({ term: term.toLowerCase() })
+  }
   render() {
+    const { contacts } = this.props
+    const contactsList =
+      this.state.term === ''
+        ? [...contacts]
+        : contacts.filter((c) => c.name.toLowerCase().includes(this.state.term))
     return (
-      <Consumer>
-        {(value) => {
-          return (
-            <div className='row'>
-              <div className='col-md-9'>
-                {value.contacts.map((con) => (
-                  <Contact key={con._id} contact={con} />
-                ))}
-              </div>
-              <div className='col-md-3'>sidebar</div>
-            </div>
-          )
-        }}
-      </Consumer>
+      <div className='row'>
+        <div className='col-md-8'>
+          <h1 className='display-4 my-3'>Contact List</h1>
+          {contactsList.map((con) => (
+            <Contact
+              key={con.id}
+              contact={con}
+              del={() => this.props.deleteContacts(con.id)}
+            />
+          ))}
+        </div>
+        <div className='col-md-4'>
+          <Sidebar findContact={this.handleSearch} />
+        </div>
+      </div>
     )
   }
 }
 
-// Contacts.propTypes = {
-//   name: PropTypes.string.isRequired,
-//   email: PropTypes.string.isRequired,
-//   phone: PropTypes.string.isRequired
-// }
-export default Contacts
+Contacts.propTypes = {
+  contacts: PropTypes.array.isRequired,
+  deleteContacts: PropTypes.func.isRequired,
+  allContacts: PropTypes.func.isRequired
+}
+
+const mapState = (state) => ({
+  contacts: state.contacts
+})
+export default connect(mapState, { allContacts, deleteContacts })(Contacts)
