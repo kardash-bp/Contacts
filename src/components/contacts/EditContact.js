@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { nanoid } from 'nanoid'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { editContact } from '../../redux/actions'
@@ -15,7 +14,7 @@ class EditContact extends Component {
     errors: {}
   }
   componentDidMount() {
-    console.log(this.props.match.params.id)
+    // console.log(this.props.match.params.id)
     const { name, email, phone, id } = this.props.contact
     this.setState({ name, email, phone, id })
   }
@@ -89,7 +88,7 @@ class EditContact extends Component {
           </form>
           <button
             type='button'
-            class='btn btn-info'
+            className='btn btn-info'
             onClick={() => this.props.history.push('/')}
           >
             {' '}

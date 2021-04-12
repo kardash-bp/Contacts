@@ -7,7 +7,7 @@ import {
 
 const initialState = []
 
-export default function (state = initialState, action) {
+export default function contactsReducer(state = initialState, action) {
   switch (action.type) {
     case ALL_CONTACTS:
       return [...action.payload]

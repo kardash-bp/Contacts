@@ -1,12 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faHome,
-  faPlus,
-  faQuestion,
-  faSearch
-} from '@fortawesome/free-solid-svg-icons'
+import { faHome, faPlus, faQuestion } from '@fortawesome/free-solid-svg-icons'
 import './header.css'
 export const Header = () => {
   return (
