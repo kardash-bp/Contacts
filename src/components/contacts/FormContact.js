@@ -28,12 +28,19 @@ class FormContact extends Component {
       return
     }
     this.props.addContact({ _id: nanoid(), ...this.state })
+    if (localStorage.hasOwnProperty('contacts')) {
+      const data = [
+        { id: nanoid(), name: name, email: email, phone: phone },
+        ...JSON.parse(localStorage.getItem('contacts'))
+      ]
+      localStorage.setItem('contacts', JSON.stringify(data))
+    }
     // after submit clear state
     this.setState({
       name: '',
       email: '',
       phone: '',
-      errors: {}
+      errors: { name: '', email: '', phone: '' }
     })
     this.props.history.push('/')
   }

@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { nanoid } from 'nanoid'
+
 import { connect } from 'react-redux'
 import { editContact } from '../../redux/actions'
 
@@ -22,7 +24,7 @@ class EditContact extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     //* errors check
-    const { name, email, phone } = this.state
+    const { id, name, email, phone } = this.state
     if (name === '') {
       this.setState({ errors: { name: 'Name is required!' } })
       return
@@ -36,6 +38,15 @@ class EditContact extends Component {
       return
     }
     this.props.editContact({ ...this.state })
+    // if (localStorage.hasOwnProperty('contacts')) {
+    //   const data = JSON.parse(localStorage.getItem('contacts')).filter((contact) =>
+    //     contact.id.toString() === id
+    //       ? { id: nanoid(), name: name, email: email, phone: phone }
+    //       : contact
+    //   )
+    //   console.log(data)
+    //   localStorage.setItem('contacts', JSON.stringify(data))
+    // }
     // after submit clear state
     this.setState({
       name: '',
